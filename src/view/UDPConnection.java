@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
+import java.net.SocketAddress;
 import java.net.UnknownHostException;
 
 import com.google.gson.Gson;
@@ -34,7 +35,6 @@ public class UDPConnection extends Thread {
                 // Recibir mensaje
                 byte[] buffer = new byte[100];
                 DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
-
                 // Esperando datagram
                System.out.println("Esperando datagram");
                 socket.receive(packet);
@@ -61,7 +61,7 @@ public class UDPConnection extends Thread {
                 ()->{
 
                     try {
-                        InetAddress ip = InetAddress.getByName("192.168.0.32");
+                        InetAddress ip = InetAddress.getByName("192.168.1.11");
 
                         //Para enviar tiene 4 parametros
                         //1.buffer, 2. tamaño de arreglo, 3. ip, 4.Puerto del otro peer

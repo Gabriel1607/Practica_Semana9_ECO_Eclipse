@@ -42,14 +42,32 @@ public void settings() {
 
 	public void draw() {
 	background(0);
-	for (int i = 0; i < pedidos.size(); i++) {
-		pedidos.get(i).draw();
+	drawPedidos();
 	}
+	public void mousePressed() {
+		deletePedidos();
+
 	}
 	
 	public void drawPedidos() {
-		
+		for (int i = 0; i < pedidos.size(); i++) {
+			pedidos.get(i).draw();
+		}	
 	}
+	public void deletePedidos() {
+		for (int i = 0; i < pedidos.size(); i++) {
+
+			if (mouseX > pedidos.get(i).getPosX() && mouseX < pedidos.get(i).getPosX()+70 && 
+					mouseY >pedidos.get(i).getPosY() && mouseY <pedidos.get(i).getPosY()+70) {
+					udp.sendMessage("Su " + pedidos.get(i).getItem() + " ya está listo");
+					order--;
+
+				pedidos.remove(i);
+			}
+
+		}
+	}
+	
 	@Override
 	public void onMessageReceived(String msg) {
 		System.out.println(pedidos.size());
