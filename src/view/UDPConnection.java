@@ -6,6 +6,8 @@ import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
+import com.google.gson.Gson;
+
 import events.OnMessage;
 import model.Instruct;
 
@@ -42,7 +44,9 @@ public class UDPConnection extends Thread {
               System.out.println("Datagram recibido" + msg);
 
                 //Deserialización
-                observer.onMessageReceived(msg);
+              Gson gson = new Gson();	
+				instruct = gson.fromJson(msg, Instruct.class);
+				observer.onMessageReceived(instruct.getFood());
 
             }
 
